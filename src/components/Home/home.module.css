@@ -1,0 +1,27 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+	grid-gap: 1rem;
+	padding-bottom: 70px;
+}
+.bottom_link {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+.bottom_btn {
+	width: 100%;
+	/* make it background more beautiful */
+	background-color: orange;
+	color: white;
+	font-size: 1.2rem;
+	height: 50px;
+	/* make it more beautiful */
+	border-top: 1px solid #e9ecef;
+
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+	border: none;
+	cursor: pointer;
+}
