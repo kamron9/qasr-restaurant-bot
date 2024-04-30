@@ -28,10 +28,10 @@ const Home = () => {
 	}, [])
 	return (
 		<div>
-			<div className={styles.top_wrapper}>
+			<div className={styles.top_header}>
 				<h3>Qasr Restarani</h3>
-				<button className={styles.bottom_btn} onClick={toggleDrawer}>
-					savatcha: {basket.length}
+				<button className={styles.top_header__btn} onClick={toggleDrawer}>
+					Savatcha: {basket.length}
 				</button>
 			</div>
 			<div className={styles.wrapper}>

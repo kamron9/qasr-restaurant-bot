@@ -13,7 +13,7 @@ const BasketDrawer = () => {
 	return (
 		<>
 			<Drawer
-				style={{ zIndex: 1000, height: '90%', padding: '1rem' }}
+				style={{ zIndex: 1000, height: '100%', padding: '1rem' }}
 				open={isOpen}
 				onClose={toggleDrawer}
 				direction='bottom'
@@ -25,7 +25,9 @@ const BasketDrawer = () => {
 					</button>
 					<h4>Savatcha</h4>
 				</div>
-				<p>Umumiy summa:{totalPrice}</p>
+				<div className={styles.total_price}>
+					<p>Umumiy summa: {totalPrice.toLocaleString('ru')} so'm</p>
+				</div>
 				{basket.length ? (
 					basket.map((item: any) => <BasketCard key={item.id} item={item} />)
 				) : (

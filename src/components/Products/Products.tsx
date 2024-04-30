@@ -58,7 +58,7 @@ const Product = ({ product }: { product: ProductType }) => {
 					</button>
 				</div>
 			) : (
-				<button className={styles.basket_btn} onClick={handleProduct}>
+				<button className={styles.add_basket_btn} onClick={handleProduct}>
 					qo'shish
 				</button>
 			)}

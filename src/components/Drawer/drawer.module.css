@@ -8,12 +8,11 @@
 .drawer_header__btn {
 	position: absolute;
 	left: 0;
-	top: 1rem;
-	background-color: orange;
+	background-color: var(--pink-color);
 	color: white;
 	border: none;
-	padding: 4px 8px;
-	border-radius: 4px;
+	padding: var(--btn-padding);
+	border-radius: var(--sm-radius);
 	cursor: pointer;
 }
 
@@ -24,5 +23,8 @@
 	flex-direction: column;
 	padding: 1rem;
 	font-weight: 900;
-	color: orange;
+}
+
+.total_price {
+	margin-bottom: 10px;
 }

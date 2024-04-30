@@ -14,7 +14,7 @@ const BasketCard = ({ item }: any) => {
 				</div>
 			</div>
 			<button
-				className={styles.basket_card__btn}
+				className={styles.basket_card__delete_btn}
 				onClick={() => removeFromBasket(item)}
 			>
 				o'chirish

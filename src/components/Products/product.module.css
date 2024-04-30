@@ -1,8 +1,5 @@
-
-
 .product {
-	/* box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2); */
-	border: 1px solid #ccc;
+	border: var(--border);
 	border-radius: 0.5rem;
 	overflow: hidden;
 	display: flex;
@@ -22,46 +19,44 @@
 }
 
 .title {
-	text-align: center;
 	margin-bottom: 3px;
 	display: -webkit-box;
 	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+	font-size: 14px;
 }
 
 .price {
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: bold;
 	margin-bottom: 3px;
 }
 
-.basket_btn {
-	/* make it btn beautiful using geen color */
-	background-color: green;
+.add_basket_btn {
+	background-color: var(--primary-color);
 	color: white;
 	border: none;
-	padding: 0.5rem 1rem;
-	border-radius: 0.5rem;
+	padding: var(--btn-padding);
+	border-radius: var(--sm-radius);
 	cursor: pointer;
 }
 .increment_btn {
-	background-color: green;
+	background-color: var(--primary-color);
 	color: white;
 	border: none;
-	padding: 0.5rem 1rem;
-	border-radius: 0.5rem;
+	padding: var(--btn-padding);
+	border-radius: var(--sm-radius);
 	cursor: pointer;
 }
 .decrement_btn {
-	background-color: red;
+	background-color: var(--red-color);
 	color: white;
 	border: none;
-	padding: 0.5rem 1rem;
-	border-radius: 0.5rem;
+	padding: var(--btn-padding);
+	border-radius: var(--sm-radius);
 	cursor: pointer;
 }
 .product_count {
 	margin: 0 5px;
 }
-
