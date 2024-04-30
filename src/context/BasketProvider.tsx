@@ -1,7 +1,14 @@
 import { createContext, useState } from 'react'
 import { ProductType } from '../components/Products/Products'
 
-export const BasketConext = createContext({
+interface BasketContextType {
+	basket: ProductType[]
+	addToBasket: (product: ProductType) => void
+	removeFromBasket: (product: ProductType) => void
+	totalPrice: number
+}
+
+export const BasketConext = createContext<BasketContextType>({
 	basket: [],
 	addToBasket: () => {},
 	removeFromBasket: () => {},
