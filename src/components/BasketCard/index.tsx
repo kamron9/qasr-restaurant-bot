@@ -2,14 +2,14 @@ import { useContext } from 'react'
 import { BasketConext } from '../../context/BasketProvider'
 import styles from './basket.module.css'
 
-interface Iitem {
-	img: string
-	title: string
-	id: number
-	category: string
-	price: number
-	count: number
-}
+// interface Iitem {
+// 	img: string
+// 	title: string
+// 	id: number
+// 	category: string
+// 	price: number
+// 	count: number
+// }
 
 const BasketCard = ({ item }: any) => {
 	const { removeFromBasket } = useContext(BasketConext)
