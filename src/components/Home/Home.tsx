@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BasketConext } from '../../context/BasketProvider'
+import BasketDrawer from '../Drawer'
 import Product from '../Products/Products'
 import styles from './home.module.css'
 type ProductType = {
@@ -34,6 +35,7 @@ const Home = () => {
 					<button className={styles.bottom_btn}>savatchaga o'tish</button>
 				</Link>
 			)}
+			<BasketDrawer />
 		</div>
 	)
 }
