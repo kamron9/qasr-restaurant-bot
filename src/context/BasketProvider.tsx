@@ -3,8 +3,8 @@ import { ProductType } from '../components/Products/Products'
 
 export const BasketConext = createContext({
 	basket: [],
-	addToBasket: (product: ProductType) => {},
-	removeFromBasket: (product: ProductType) => {},
+	addToBasket: () => {},
+	removeFromBasket: () => {},
 	totalPrice: 0,
 })
 
@@ -22,7 +22,7 @@ const BasketProvider = ({ children }: any) => {
 		setTotalPrice(total)
 	}
 
-	const addToBasket = (product: any) => {
+	const addToBasket = (product: ProductType) => {
 		setBasket([...basket, product])
 		calculateTotalPrice()
 	}
