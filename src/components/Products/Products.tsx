@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { BasketConext } from '../../context/BasketProvider'
 import styles from './product.module.css'
 
@@ -30,6 +30,12 @@ const Product = ({ product }: { product: ProductType }) => {
 			removeFromBasket(product)
 		}
 	}
+
+	useEffect(() => {
+		if (!inBasket) {
+			setCount(1)
+		}
+	}, [inBasket])
 
 	return (
 		<div className={styles.product}>

@@ -9,8 +9,8 @@ body {
 	color: var(--tg-theme-text-color);
 }
 .drawer {
-	background-color: var(--tg-theme-bg-color) !important;
-	color: var(--tg-theme-text-color) !important;
+	/* background-color: var(--tg-theme-bg-color) !important;
+	color: var(--tg-theme-text-color) !important; */
 }
 #root {
 	max-width: 900px;
