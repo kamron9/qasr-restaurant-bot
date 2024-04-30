@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { BasketConext } from '../../context/BasketProvider'
+import { DrawerContext } from '../../context/DrawerContext'
 import BasketDrawer from '../Drawer'
 import Product from '../Products/Products'
 import styles from './home.module.css'
@@ -15,6 +15,7 @@ type ProductType = {
 const Home = () => {
 	const [products, setProducts] = useState<ProductType[]>([])
 	const { basket } = useContext(BasketConext)
+	const { toggleDrawer } = useContext(DrawerContext)
 
 	const fetchProducts = async () => {
 		const response = await fetch('https://fakestoreapi.com/products')
@@ -26,16 +27,19 @@ const Home = () => {
 		fetchProducts()
 	}, [])
 	return (
-		<div className={styles.wrapper}>
-			{products.map((product, index) => (
-				<Product key={index} product={product} />
-			))}
-			{basket.length > 0 && (
-				<Link to={'/basket'} className={styles.bottom_link}>
-					<button className={styles.bottom_btn}>savatchaga o'tish</button>
-				</Link>
-			)}
-			<BasketDrawer />
+		<div>
+			<div className={styles.top_wrapper}>
+				<h3>Qasr Restarani</h3>
+				<button className={styles.bottom_btn} onClick={toggleDrawer}>
+					savatcha: {basket.length}
+				</button>
+			</div>
+			<div className={styles.wrapper}>
+				{products.map((product, index) => (
+					<Product key={index} product={product} />
+				))}
+				<BasketDrawer />
+			</div>
 		</div>
 	)
 }

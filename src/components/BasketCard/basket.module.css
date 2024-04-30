@@ -1,0 +1,47 @@
+/* lets make design for basket card */
+.basket_card {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+.basket_card__body {
+	display: flex;
+	align-items: center;
+}
+
+.basket_card__info {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-left: 20px;
+}
+
+.basket_card__img {
+	width: 70px;
+	height: 70px;
+	object-fit: contain;
+	min-width: 70px;
+	min-height: 70px;
+}
+
+.basket_card__title {
+	font-size: 1rem;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	margin: 0;
+}
+
+.basket_card__btn {
+	background-color: #f44336;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-radius: 4px;
+}

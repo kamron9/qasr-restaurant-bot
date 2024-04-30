@@ -5,12 +5,13 @@ export const BasketConext = createContext({
 	basket: [],
 	addToBasket: (product: ProductType) => {},
 	removeFromBasket: (product: ProductType) => {},
+	totalPrice: 0,
 })
 
 const BasketProvider = ({ children }: any) => {
 	const [basket, setBasket] = useState<any>([])
 
-	const [tatalPrice, setTotalPrice] = useState(0)
+	const [totalPrice, setTotalPrice] = useState(0)
 
 	//create function to calculate total price
 	const calculateTotalPrice = () => {
@@ -20,11 +21,13 @@ const BasketProvider = ({ children }: any) => {
 		)
 		setTotalPrice(total)
 	}
-	console.log(tatalPrice)
 
 	const addToBasket = (product: any) => {
 		setBasket([...basket, product])
+		calculateTotalPrice()
 	}
+
+	console.log(basket)
 
 	const removeFromBasket = (product: ProductType) => {
 		const newBasket = basket.filter(
@@ -34,7 +37,9 @@ const BasketProvider = ({ children }: any) => {
 	}
 
 	return (
-		<BasketConext.Provider value={{ basket, addToBasket, removeFromBasket }}>
+		<BasketConext.Provider
+			value={{ basket, addToBasket, removeFromBasket, totalPrice }}
+		>
 			{children}
 		</BasketConext.Provider>
 	)

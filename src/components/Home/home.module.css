@@ -4,24 +4,21 @@
 	grid-gap: 1rem;
 	padding-bottom: 70px;
 }
-.bottom_link {
-	position: fixed;
-	bottom: 0;
-	left: 0;
+.top_wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	width: 100%;
+	padding: 1rem;
+	text-align: end;
 }
 .bottom_btn {
-	width: 100%;
-	/* make it background more beautiful */
-	background-color: orange;
+	/* make me beautiful background color  make beautiful */
+	background-color: #f1356d;
 	color: white;
-	font-size: 1.2rem;
-	height: 50px;
-	/* make it more beautiful */
-	border-top: 1px solid #e9ecef;
-
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
+	font-size: 1rem;
+	padding: 0.5rem 1rem;
 	border: none;
 	cursor: pointer;
+	border-radius: 22px;
 }
