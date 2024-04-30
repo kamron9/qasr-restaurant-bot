@@ -1,0 +1,36 @@
+.tabs {
+	width: 100%;
+}
+
+.tab-list {
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+	overflow-x: scroll;
+	padding: 20px 0;
+}
+
+.tab-button {
+	background: none;
+	border: none;
+	padding: 1em;
+	cursor: pointer;
+}
+
+.tab-button.active {
+	/* background-color: var(--tg-theme-bg-color); */
+	background-color: #868686;
+	color: white;
+	border-radius: 22px;
+	font-weight: bold;
+}
+
+.tab-content {
+	padding: 1em 0;
+	border-top: var(--border);
+
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	grid-gap: 5px;
+	padding-bottom: 70px;
+}

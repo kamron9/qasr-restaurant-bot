@@ -6,11 +6,14 @@ export type ProductType = {
 	id: number
 	title: string
 	price: number
-	image: string
+	img: string
 	category: string
+	count: number
 }
 
 const Product = ({ product }: { product: ProductType }) => {
+	console.log(product)
+
 	const [inBasket, setInBasket] = useState(false)
 	const [count, setCount] = useState(1)
 	const { addToBasket, removeFromBasket } = useContext(BasketConext)
@@ -40,13 +43,13 @@ const Product = ({ product }: { product: ProductType }) => {
 	return (
 		<div className={styles.product}>
 			<img
-				src={product.image}
+				src={product.img}
 				height={200}
 				alt={product.title}
 				className={styles.image}
 			/>
 			<p className={styles.title}>{product.title}</p>
-			<p className={styles.price}>${product.price}</p>
+			<p className={styles.price}>{product.price.toLocaleString('ru')} so'm</p>
 			{inBasket ? (
 				<div>
 					<button className={styles.decrement_btn} onClick={decrement}>

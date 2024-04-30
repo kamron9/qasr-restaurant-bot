@@ -16,7 +16,7 @@
 .basket_card__info {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 5px;
 	margin-left: 20px;
 }
 
