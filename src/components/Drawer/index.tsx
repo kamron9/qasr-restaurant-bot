@@ -1,14 +1,14 @@
 import { useContext } from 'react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
-import { BasketConext } from '../../context/BasketProvider'
 import { DrawerContext } from '../../context/DrawerContext'
+import { ProductContext } from '../../context/ProductProvider'
 import BasketCard from '../BasketCard'
 import styles from './drawer.module.css'
 
 const BasketDrawer = () => {
 	const { isOpen, toggleDrawer } = useContext(DrawerContext)
-	const { basket, totalPrice } = useContext(BasketConext)
+	const { productState, totalPrice } = useContext(ProductContext)
 
 	return (
 		<>
@@ -26,10 +26,12 @@ const BasketDrawer = () => {
 					<h4>Savatcha</h4>
 				</div>
 				<div className={styles.total_price}>
-					<p>Umumiy summa: {totalPrice.toLocaleString('ru')} so'm</p>
+					<p>Umumiy summa: so'm</p>
 				</div>
-				{basket.length ? (
-					basket.map((item: any) => <BasketCard key={item.id} item={item} />)
+				{productState.length ? (
+					productState.map((item: any) => (
+						<BasketCard key={item.id} item={item} />
+					))
 				) : (
 					<div className={styles.empty_basket}>
 						<p>Savatcha bo'sh</p>

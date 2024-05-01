@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { BasketConext } from '../../context/BasketProvider'
+import { ProductContext } from '../../context/ProductProvider'
 import styles from './product.module.css'
 
 export type ProductType = {
@@ -12,22 +12,28 @@ export type ProductType = {
 }
 
 const Product = ({ product }: { product: ProductType }) => {
-	console.log(product)
-
 	const [inBasket, setInBasket] = useState(false)
 	const [count, setCount] = useState(1)
-	const { addToBasket, removeFromBasket } = useContext(BasketConext)
+	const {
+		productState,
+		addToBasket,
+		removeFromBasket,
+		incrementProductCount,
+		decrementProductCount,
+	} = useContext(ProductContext)
 
 	// get product and push it to basket
 	const handleProduct = () => {
 		setInBasket(true)
-		addToBasket({ ...product })
+		addToBasket(product)
 	}
 
-	const increment = () => setCount(count + 1)
+	const increment = () => {
+		incrementProductCount(product.id)
+	}
 	// remove product from basket if count is 1
 	const decrement = () => {
-		setCount(count > 1 ? count - 1 : count)
+		decrementProductCount(product.id)
 		if (count === 1) {
 			setInBasket(false)
 			removeFromBasket(product)
@@ -55,7 +61,7 @@ const Product = ({ product }: { product: ProductType }) => {
 					<button className={styles.decrement_btn} onClick={decrement}>
 						-
 					</button>
-					<span className={styles.product_count}>{count}</span>
+					<span className={styles.product_count}>{product.count}</span>
 					<button className={styles.increment_btn} onClick={increment}>
 						+
 					</button>

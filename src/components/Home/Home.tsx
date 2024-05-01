@@ -1,12 +1,12 @@
 import { useContext } from 'react'
-import { BasketConext } from '../../context/BasketProvider'
 import { DrawerContext } from '../../context/DrawerContext'
+import { ProductContext } from '../../context/ProductProvider'
 import BasketDrawer from '../Drawer'
 import Tabs from '../Tabs'
 import styles from './home.module.css'
 
 const Home = () => {
-	const { basket } = useContext(BasketConext)
+	const { productState } = useContext(ProductContext)
 	const { toggleDrawer } = useContext(DrawerContext)
 
 	return (
@@ -14,7 +14,7 @@ const Home = () => {
 			<div className={styles.top_header}>
 				<h3>Qasr Restarani</h3>
 				<button className={styles.top_header__btn} onClick={toggleDrawer}>
-					Savatcha: {basket.length}
+					Savatcha: {productState.length}
 				</button>
 			</div>
 			<Tabs />

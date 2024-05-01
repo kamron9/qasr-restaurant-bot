@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { BasketConext } from '../../context/BasketProvider'
+import { ProductContext } from '../../context/ProductProvider'
 import styles from './basket.module.css'
 
 // interface Iitem {
@@ -12,7 +12,7 @@ import styles from './basket.module.css'
 // }
 
 const BasketCard = ({ item }: any) => {
-	const { removeFromBasket } = useContext(BasketConext)
+	const { removeFromBasket } = useContext(ProductContext)
 	return (
 		<div className={styles.basket_card}>
 			<div className={styles.basket_card__body}>
