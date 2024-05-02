@@ -26,7 +26,7 @@ const Tabs = () => {
 	const [activeTab, setActiveTab] = useState<number>(0)
 	const [tabs, setTabs] = useState<ITab[]>([])
 	const [products, setProducts] = useState<IProduct[]>([])
-
+	console.log(tabs)
 	//get category
 	const getTabs = async () => {
 		try {
