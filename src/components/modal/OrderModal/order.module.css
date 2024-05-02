@@ -58,7 +58,7 @@
 }
 .bold_text {
 	font-weight: 600;
-	color: var(--tg-theme-text-color) !important;
+	color: black;
 }
 
 .form_label {
