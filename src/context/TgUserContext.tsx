@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 // interface UserType {
 // 	phone_number: string
@@ -13,15 +13,25 @@ interface TgContextType {
 	setUser: any
 }
 
-const TgUserContext = createContext<TgContextType>({
+export const TgUserContext = createContext<TgContextType>({
 	user: {},
 	setUser: () => {},
 })
 
-export const useTgUser = () => TgUserContext
+
 
 const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 	const [user, setUser] = useState({})
+	const tg = window.Telegram?.WebApp
+
+	useEffect(() => {
+		const id = tg?.initDataUnsafe?.user?.id
+		fetch(`https://avtosavdo.chogirmali.uz/users/auth/${id}`)
+			.then(res => res.json())
+			.then(data => {
+				setUser(data)
+			})
+	}, [])
 
 	return (
 		<TgUserContext.Provider value={{ user, setUser }}>
