@@ -32,7 +32,7 @@ const Home = () => {
 			{!isUserExist && <AuthModal />}
 			<div className={styles.top_header}>
 				<h3>Qasr Restarani</h3>
-				<span>{user?.phone_number}</span>
+				<h2 style={{ color: 'white' }}>{user?.phone_number}</h2>
 				<button className={styles.top_header__btn} onClick={toggleDrawer}>
 					Savatcha: {productState.length}
 				</button>
