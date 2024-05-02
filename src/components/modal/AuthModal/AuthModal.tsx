@@ -12,11 +12,12 @@ const AuthModal = () => {
 		localStorage.setItem('phone', `+998${input}`)
 		setIsOpen(false)
 	}
-	const tg = window.Telegram?.WebApp
 
 	return (
 		<>
-			<div className={`${styles.modal_overlay} ${!isOpen && styles.close_modal}`}>
+			<div
+				className={`${styles.modal_overlay} ${!isOpen && styles.close_modal}`}
+			>
 				<div className={styles.modal}>
 					<h3 className={styles.modal_title}>Kirish</h3>
 					<form onSubmit={handleInput} className={styles.auth_form}>
