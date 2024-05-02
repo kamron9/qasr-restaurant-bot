@@ -5,8 +5,14 @@ import BasketDrawer from '../Drawer'
 import Tabs from '../Tabs'
 import styles from './home.module.css'
 
+declare global {
+	interface Window {
+		Telegram: any
+	}
+}
+
 const Home = () => {
-	const tg = window?.Telegram?.WebApp
+	const tg = window.Telegram?.WebApp
 
 	useEffect(() => {
 		tg.ready()
