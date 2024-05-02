@@ -26,7 +26,6 @@ const Tabs = () => {
 	const [activeTab, setActiveTab] = useState<number>(0)
 	const [tabs, setTabs] = useState<ITab[]>([])
 	const [products, setProducts] = useState<IProduct[]>([])
-	console.log(tabs)
 	//get category
 	const getTabs = async () => {
 		try {
@@ -54,13 +53,7 @@ const Tabs = () => {
 			console.error(error)
 		}
 	}
-	let arr = new Array(10).fill({
-		id: 1,
-		image:
-			'https://avtosavdo.chogirmali.uz/media/categories/IMG_20240429_182336_252.jpg',
-		parent: null,
-		title: 'Ichimliklar',
-	})
+
 	//filter by category
 	useEffect(() => {
 		getTabs()
@@ -69,7 +62,7 @@ const Tabs = () => {
 	return (
 		<div className='tabs'>
 			<div className='tab-list'>
-				{arr.map((tab, index) => (
+				{tabs.map((tab, index) => (
 					<button
 						key={index}
 						className={`tab-button ${activeTab === tab.id ? 'active' : ''}`}
