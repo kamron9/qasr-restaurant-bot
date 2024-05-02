@@ -33,7 +33,7 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 			.then(data => {
 				console.log(data)
 
-				setUser(data.data)
+				setUser(data)
 			})
 	}, [])
 
