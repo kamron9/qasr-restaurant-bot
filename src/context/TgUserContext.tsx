@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
 
 // interface UserType {
@@ -25,9 +26,14 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 		const tg = window.Telegram?.WebApp
 
 		const id = tg?.initDataUnsafe?.user?.id
-		fetch(`https://avtosavdo.chogirmali.uz/users/auth/${id}`)
-			.then(res => res.json())
+		axios
+			.post(`https://avtosavdo.chogirmali.uz/users/auth/`, {
+				telegram_id: id,
+			})
+
 			.then(data => {
+				console.log(data)
+
 				setUser(data)
 			})
 	}, [])
