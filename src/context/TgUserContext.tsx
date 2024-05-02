@@ -1,16 +1,21 @@
 import { createContext, useState } from 'react'
 
-interface UserType {
-	phone_number: string
-	telegram_id: string
-	full_name: string
-	is_blocked: boolean
-	addresses: Array<{}>
+// interface UserType {
+// 	phone_number: string
+// 	telegram_id: string
+// 	full_name: string
+// 	is_blocked: boolean
+// 	addresses: Array<{}>
+// }
+
+interface TgContextType {
+	user: any
+	setUser: any
 }
 
-const TgUserContext = createContext({
+const TgUserContext = createContext<TgContextType>({
 	user: {},
-	setUser: (user: UserType) => {},
+	setUser: () => {},
 })
 
 export const useTgUser = () => TgUserContext
