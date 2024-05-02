@@ -11,9 +11,10 @@
 	background-color: var(--pink-color);
 	color: white;
 	border: none;
-	padding: var(--btn-padding);
+	padding: 0.5rem 1rem;
 	border-radius: var(--sm-radius);
 	cursor: pointer;
+	font-size: 12px;
 }
 
 .empty_basket {

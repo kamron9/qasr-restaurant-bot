@@ -5,6 +5,7 @@ import { DrawerContext } from '../../context/DrawerContext'
 import { ProductCartType, ProductContext } from '../../context/ProductProvider'
 import { convertPrice } from '../../utils/helpers'
 import BasketCard from '../BasketCard'
+import OrderModalTgUser from '../modal/OrderModal/OrderModal'
 import styles from './drawer.module.css'
 
 const BasketDrawer = () => {
@@ -25,6 +26,7 @@ const BasketDrawer = () => {
 						Orqaga
 					</button>
 					<h4>Savatcha</h4>
+					<OrderModalTgUser />
 				</div>
 				<div className={styles.total_price}>
 					<p>Umumiy summa: {convertPrice(totalPrice())} so'm</p>

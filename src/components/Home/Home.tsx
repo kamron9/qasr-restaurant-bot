@@ -3,7 +3,7 @@ import { DrawerContext } from '../../context/DrawerContext'
 import { ProductContext } from '../../context/ProductProvider'
 import BasketDrawer from '../Drawer'
 import Tabs from '../Tabs'
-import AuthModal from '../modal/AuthModal'
+import AuthModal from '../modal/AuthModal/AuthModal'
 import styles from './home.module.css'
 
 declare global {
