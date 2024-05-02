@@ -18,13 +18,12 @@ export const TgUserContext = createContext<TgContextType>({
 	setUser: () => {},
 })
 
-
-
 const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 	const [user, setUser] = useState({})
-	const tg = window.Telegram?.WebApp
 
 	useEffect(() => {
+		const tg = window.Telegram?.WebApp
+
 		const id = tg?.initDataUnsafe?.user?.id
 		fetch(`https://avtosavdo.chogirmali.uz/users/auth/${id}`)
 			.then(res => res.json())
