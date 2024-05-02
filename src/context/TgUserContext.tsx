@@ -29,6 +29,7 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 		axios
 			.post(`https://avtosavdo.chogirmali.uz/api/v1/users/auth`, {
 				telegram_id: id,
+				// phone_number: localStorage.getItem('phone'),
 			})
 			.then(data => {
 				console.log(data)
