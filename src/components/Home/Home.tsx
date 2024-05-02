@@ -6,10 +6,11 @@ import Tabs from '../Tabs'
 import styles from './home.module.css'
 
 const Home = () => {
-	const tg = window.Telegram.WebApp
+	const tg = window?.Telegram?.WebApp
 
 	useEffect(() => {
 		tg.ready()
+		tg.expand()
 	}, [])
 
 	const { productState } = useContext(ProductContext)
