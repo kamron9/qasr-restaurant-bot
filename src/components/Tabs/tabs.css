@@ -16,6 +16,7 @@
 	border: none;
 	padding: 1em;
 	cursor: pointer;
+	color: var(--tg-theme-text-color);
 }
 
 .tab-button.active {
