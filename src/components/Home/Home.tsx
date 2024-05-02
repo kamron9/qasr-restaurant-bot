@@ -1,7 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { DrawerContext } from '../../context/DrawerContext'
 import { ProductContext } from '../../context/ProductProvider'
-import { TgUserContext } from '../../context/TgUserContext'
 import BasketDrawer from '../Drawer'
 import Tabs from '../Tabs'
 import AuthModal from '../modal/AuthModal/AuthModal'
@@ -16,7 +15,6 @@ declare global {
 const Home = () => {
 	const tg = window.Telegram?.WebApp
 	const phone = localStorage.getItem('phone') || ''
-	const { user } = useContext(TgUserContext)
 
 	useEffect(() => {
 		tg.ready()
@@ -32,7 +30,6 @@ const Home = () => {
 			{!isUserExist && <AuthModal />}
 			<div className={styles.top_header}>
 				<h3>Qasr Restarani</h3>
-				<h2 style={{ color: 'white' }}>{user.phone_number}</h2>
 				<button className={styles.top_header__btn} onClick={toggleDrawer}>
 					Savatcha: {productState.length}
 				</button>
