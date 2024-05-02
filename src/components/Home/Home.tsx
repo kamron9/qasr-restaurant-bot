@@ -25,7 +25,7 @@ const Home = () => {
 		<div>
 			<div className={styles.top_header}>
 				<h3>Qasr Restarani</h3>
-				<h2>{tg?.initDataUnsafe?.user?.first_name}</h2>
+				<h2>{tg?.initDataUnsafe?.user?.id}</h2>
 				<button className={styles.top_header__btn} onClick={toggleDrawer}>
 					Savatcha: {productState.length}
 				</button>
