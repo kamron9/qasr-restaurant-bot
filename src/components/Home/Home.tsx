@@ -3,6 +3,7 @@ import { DrawerContext } from '../../context/DrawerContext'
 import { ProductContext } from '../../context/ProductProvider'
 import BasketDrawer from '../Drawer'
 import Tabs from '../Tabs'
+import AuthModal from '../modal/AuthModal'
 import styles from './home.module.css'
 
 declare global {
@@ -13,23 +14,24 @@ declare global {
 
 const Home = () => {
 	const tg = window.Telegram?.WebApp
+	const phone = localStorage.getItem('phone') || ''
+	console.log(phone)
 
 	useEffect(() => {
 		tg.ready()
 		tg.expand()
 	}, [])
-
+	//tg?.initDataUnsafe?.user?.id
+	const isUserExist = tg?.initDataUnsafe?.user?.id || phone
 	const { productState } = useContext(ProductContext)
 	const { toggleDrawer } = useContext(DrawerContext)
+
 	return (
 		<div>
+			{!isUserExist && <AuthModal />}
 			<div className={styles.top_header}>
 				<h3>Qasr Restarani</h3>
-				<h2>
-					{tg?.initDataUnsafe?.user?.id
-						? tg?.initDataUnsafe?.user?.id
-						: 'siz telegramdan kirmadingiz'}
-				</h2>
+
 				<button className={styles.top_header__btn} onClick={toggleDrawer}>
 					Savatcha: {productState.length}
 				</button>
