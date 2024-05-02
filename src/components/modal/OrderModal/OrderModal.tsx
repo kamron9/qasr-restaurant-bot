@@ -1,9 +1,41 @@
-import { useState } from 'react'
+import axios from 'axios'
+import { useContext, useState } from 'react'
 import CloseIcon from '../../../assets/CloseIcon'
+import { ProductContext } from '../../../context/ProductProvider'
+import { TgUserContext } from '../../../context/TgUserContext'
 import styles from './order.module.css'
 
 const OrderModalTgUser = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+	const { user } = useContext(TgUserContext)
+	const { productState } = useContext(ProductContext)
+
+	const postData = async (data: any) => {
+		try {
+			const res = await axios.post(
+				'https://avtosavdo.chogirmali.uz/api/v1/shop/order',
+				data
+			)
+			if (res.status === 201) {
+				const tg = window.Telegram?.WebApp
+				tg.close()
+			}
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
+	const handleData = (e: any) => {
+		e.preventDefault()
+		const data = productState.map(item => {
+			return {
+				product: item.id,
+				count: item.count,
+			}
+		})
+		postData(data)
+	}
+
 	return (
 		<>
 			<button className={styles.order_btn} onClick={() => setIsModalOpen(true)}>
@@ -22,7 +54,7 @@ const OrderModalTgUser = () => {
 					>
 						<CloseIcon />
 					</button>
-					<form className={styles.form}>
+					<form className={styles.form} onSubmit={handleData}>
 						<div className={styles.form_group}>
 							<label className={styles.form_label} htmlFor='username'>
 								Ismingiz
@@ -40,7 +72,7 @@ const OrderModalTgUser = () => {
 						{/* qo'shimcha raqam */}
 						<div className={styles.form_group}>
 							<p className={styles.bold_text}>
-								Telefon raqamingiz:+998919192020
+								Telefon raqamingiz: <span>{user.phone_number}</span>
 							</p>
 
 							<label className={styles.form_label} htmlFor='other-phone'>
@@ -62,16 +94,20 @@ const OrderModalTgUser = () => {
 								name='address'
 								id='address'
 							>
-								<option value='1'>Urganch</option>
-								<option value='2'>Xiva</option>
-								<option value='3'>Qo'shko'pir</option>
+								{user?.addresses?.map((address: any) => (
+									<option key={address.id} value={address.id}>
+										{address.address}
+									</option>
+								))}
 							</select>
 						</div>
 						<p className={styles.form_warning_msg}>
 							Qo'shimcha manzil kiritish uchun telegram botga yangi manzilni
 							yuboring
 						</p>
-						<button className={styles.order_submit_btn}>Buyurtma berish</button>
+						<button className={styles.order_submit_btn} type='submit'>
+							Buyurtma berish
+						</button>
 					</form>
 				</div>
 			</div>

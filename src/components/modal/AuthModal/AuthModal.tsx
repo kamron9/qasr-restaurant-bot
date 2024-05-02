@@ -12,6 +12,7 @@ const AuthModal = () => {
 		localStorage.setItem('phone', `+998${input}`)
 		setIsOpen(false)
 	}
+	const tg = window.Telegram?.WebApp
 
 	return (
 		<>
