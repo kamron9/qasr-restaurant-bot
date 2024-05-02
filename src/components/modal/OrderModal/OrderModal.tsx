@@ -14,7 +14,12 @@ const OrderModalTgUser = () => {
 		try {
 			await axios.post(
 				'https://avtosavdo.chogirmali.uz/api/v1/shop/orders',
-				data
+				data,
+				{
+					headers: {
+						Authorization: user.phone_number,
+					},
+				}
 			)
 
 			const tg = window.Telegram?.WebApp
