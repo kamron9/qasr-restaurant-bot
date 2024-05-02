@@ -13,7 +13,7 @@ const OrderModalTgUser = () => {
 	const postData = async (data: any) => {
 		try {
 			await axios.post(
-				'https://avtosavdo.chogirmali.uz/api/v1/shop/order',
+				'https://avtosavdo.chogirmali.uz/api/v1/shop/orders',
 				data
 			)
 
@@ -32,7 +32,11 @@ const OrderModalTgUser = () => {
 				count: item.count,
 			}
 		})
-		postData(data)
+		postData({
+			orders: data,
+			delivery_type: 'delivery',
+			address: e.target.address.value,
+		})
 	}
 
 	return (
