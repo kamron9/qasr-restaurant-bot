@@ -4,6 +4,7 @@
 
 .tab-list {
 	display: flex;
+	gap: 5px;
 	list-style-type: none;
 	padding: 0;
 	overflow-x: scroll;
@@ -22,7 +23,6 @@
 	background-color: #868686;
 	color: white;
 	border-radius: 22px;
-	font-weight: bold;
 }
 
 .tab-content {

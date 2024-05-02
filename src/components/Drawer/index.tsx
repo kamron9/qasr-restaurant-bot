@@ -2,7 +2,8 @@ import { useContext } from 'react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { DrawerContext } from '../../context/DrawerContext'
-import { ProductContext } from '../../context/ProductProvider'
+import { ProductCartType, ProductContext } from '../../context/ProductProvider'
+import { convertPrice } from '../../utils/helpers'
 import BasketCard from '../BasketCard'
 import styles from './drawer.module.css'
 
@@ -26,10 +27,10 @@ const BasketDrawer = () => {
 					<h4>Savatcha</h4>
 				</div>
 				<div className={styles.total_price}>
-					<p>Umumiy summa: so'm</p>
+					<p>Umumiy summa: {convertPrice(totalPrice())} so'm</p>
 				</div>
 				{productState.length ? (
-					productState.map((item: any) => (
+					productState.map((item: ProductCartType) => (
 						<BasketCard key={item.id} item={item} />
 					))
 				) : (

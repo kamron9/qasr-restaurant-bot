@@ -2,11 +2,13 @@ import { createContext, useReducer } from 'react'
 import { ProductType } from '../components/Products/Products'
 import { productReducer } from '../reducers/productReducer'
 
+export type ProductCartType = ProductType & { count: number }
+
 interface ProductContextType {
-	productState: ProductType[]
+	productState: ProductCartType[]
 	addToBasket: (product: ProductType) => void
 	removeFromBasket: (product: ProductType) => void
-	totalPrice: (product: ProductType) => void
+	totalPrice: () => number
 	incrementProductCount: (id: number) => void
 	decrementProductCount: (id: number) => void
 }
@@ -15,7 +17,7 @@ export const ProductContext = createContext<ProductContextType>({
 	productState: [],
 	addToBasket: () => {},
 	removeFromBasket: () => {},
-	totalPrice: () => {},
+	totalPrice: () => 0,
 	incrementProductCount: () => {},
 	decrementProductCount: () => {},
 })
@@ -31,8 +33,12 @@ const ProductProvider = ({ children }: any) => {
 		dispatch({ type: 'REMOVE_FROM_BASKET', id: product.id })
 	}
 
-	const totalPrice = (product: ProductType) => {
-		dispatch({ type: 'TOTAL_PRICE', item: product })
+	const totalPrice = () => {
+		return productState.reduce(
+			(acc: number, item: ProductCartType) =>
+				acc + Number(item.price) * item.count,
+			0
+		)
 	}
 
 	const incrementProductCount = (id: number) => {

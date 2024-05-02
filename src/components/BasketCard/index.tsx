@@ -1,30 +1,26 @@
-import { useContext } from 'react'
-import { ProductContext } from '../../context/ProductProvider'
+import { FC, useContext } from 'react'
+import { ProductCartType, ProductContext } from '../../context/ProductProvider'
+import { convertPrice } from '../../utils/helpers'
 import styles from './basket.module.css'
 
-// interface Iitem {
-// 	img: string
-// 	title: string
-// 	id: number
-// 	category: string
-// 	price: number
-// 	count: number
-// }
+interface BasketCardProps {
+	item: ProductCartType
+}
 
-const BasketCard = ({ item }: any) => {
+const BasketCard: FC<BasketCardProps> = ({ item }) => {
 	const { removeFromBasket } = useContext(ProductContext)
 	return (
 		<div className={styles.basket_card}>
 			<div className={styles.basket_card__body}>
 				<img
-					src={item.img}
+					src={item.images[0].image}
 					alt={item.title}
 					className={styles.basket_card__img}
 				/>
 				<div className={styles.basket_card__info}>
 					<h4 className={styles.basket_card__title}>{item.title}</h4>
 					<p className={styles.basket_card__price}>
-						{item.price.toLocaleString('ru')} so'm
+						{convertPrice(item.price)} so'm
 					</p>
 					<p>dona: {item.count}</p>
 				</div>

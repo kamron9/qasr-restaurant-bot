@@ -8,7 +8,6 @@ import styles from './home.module.css'
 const Home = () => {
 	const { productState } = useContext(ProductContext)
 	const { toggleDrawer } = useContext(DrawerContext)
-
 	return (
 		<div>
 			<div className={styles.top_header}>

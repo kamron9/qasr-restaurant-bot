@@ -1,30 +1,30 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { ProductContext } from '../../context/ProductProvider'
+import { convertPrice } from '../../utils/helpers'
 import styles from './product.module.css'
 
-export type ProductType = {
+export interface ProductType {
+	category_id: number
 	id: number
 	title: string
-	price: number
-	img: string
-	category: string
-	count: number
+	price: string
+	discount_percentage: number
+	real_price: number
+	images: {
+		image: string
+	}[]
 }
 
 const Product = ({ product }: { product: ProductType }) => {
-	const [inBasket, setInBasket] = useState(false)
-	const [count, setCount] = useState(1)
 	const {
 		productState,
 		addToBasket,
-		removeFromBasket,
 		incrementProductCount,
 		decrementProductCount,
 	} = useContext(ProductContext)
 
 	// get product and push it to basket
 	const handleProduct = () => {
-		setInBasket(true)
 		addToBasket(product)
 	}
 
@@ -34,34 +34,26 @@ const Product = ({ product }: { product: ProductType }) => {
 	// remove product from basket if count is 1
 	const decrement = () => {
 		decrementProductCount(product.id)
-		if (count === 1) {
-			setInBasket(false)
-			removeFromBasket(product)
-		}
 	}
-
-	useEffect(() => {
-		if (!inBasket) {
-			setCount(1)
-		}
-	}, [inBasket])
 
 	return (
 		<div className={styles.product}>
 			<img
-				src={product.img}
+				src={product.images[0].image}
 				height={200}
 				alt={product.title}
 				className={styles.image}
 			/>
 			<p className={styles.title}>{product.title}</p>
-			<p className={styles.price}>{product.price.toLocaleString('ru')} so'm</p>
-			{inBasket ? (
+			<p className={styles.price}>{convertPrice(product.price)} so'm</p>
+			{productState.find(item => item.id === product.id) ? (
 				<div>
 					<button className={styles.decrement_btn} onClick={decrement}>
 						-
 					</button>
-					<span className={styles.product_count}>{product.count}</span>
+					<span className={styles.product_count}>
+						{productState.find(item => item.id === product.id)?.count}
+					</span>
 					<button className={styles.increment_btn} onClick={increment}>
 						+
 					</button>
