@@ -12,14 +12,13 @@ const OrderModalTgUser = () => {
 
 	const postData = async (data: any) => {
 		try {
-			const res = await axios.post(
+			await axios.post(
 				'https://avtosavdo.chogirmali.uz/api/v1/shop/order',
 				data
 			)
-			if (res.status === 201) {
-				const tg = window.Telegram?.WebApp
-				tg.close()
-			}
+
+			const tg = window.Telegram?.WebApp
+			tg.close()
 		} catch (err) {
 			console.log(err)
 		}
