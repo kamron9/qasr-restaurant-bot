@@ -17,12 +17,12 @@ html {
 	scrollbar-gutter: stable;
 }
 body {
-	/* background-color: var(--tg-theme-bg-color);
-	color: var(--tg-theme-text-color); */
+	background-color: var(--tg-theme-bg-color);
+	color: var(--tg-theme-text-color);
 }
 .drawer {
-	/* background-color: var(--tg-theme-bg-color) !important;
-	color: var(--tg-theme-text-color) !important; */
+	background-color: var(--tg-theme-bg-color) !important;
+	color: var(--tg-theme-text-color) !important;
 	overflow-y: auto;
 }
 #root {
