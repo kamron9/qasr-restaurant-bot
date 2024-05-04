@@ -102,8 +102,8 @@ const OrderModalTgUser = () => {
 								name='address'
 								id='address'
 							>
-								{user?.addresses?.map((address: any) => (
-									<option key={address.id} value={address.id}>
+								{user?.addresses?.map(({ id, address }: any) => (
+									<option key={id} value={address}>
 										{address.address}
 									</option>
 								))}

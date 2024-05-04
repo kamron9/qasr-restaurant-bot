@@ -27,10 +27,14 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 
 		const id = tg?.initDataUnsafe?.user?.id
 		axios
-			.post(`https://avtosavdo.chogirmali.uz/api/v1/users/auth`, {
-				telegram_id: id,
-				// phone_number: localStorage.getItem('phone'),
-			})
+			.post(
+				`https://qasr.chogirmali.uz/api/v1/users/auth
+			`,
+				{
+					telegram_id: id,
+					// phone_number: localStorage.getItem('phone'),
+				}
+			)
 			.then(data => {
 				setUser(data.data)
 			})
