@@ -32,8 +32,6 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 				// phone_number: localStorage.getItem('phone'),
 			})
 			.then(data => {
-				console.log(data)
-
 				setUser(data.data)
 			})
 	}, [])

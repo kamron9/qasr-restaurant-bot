@@ -10,9 +10,7 @@ export interface ProductType {
 	price: string
 	discount_percentage: number
 	real_price: number
-	images: {
-		image: string
-	}[]
+	image: string
 }
 
 const Product = ({ product }: { product: ProductType }) => {
@@ -39,7 +37,7 @@ const Product = ({ product }: { product: ProductType }) => {
 	return (
 		<div className={styles.product}>
 			<img
-				src={product.images[0].image}
+				src={product?.image}
 				height={200}
 				alt={product.title}
 				className={styles.image}

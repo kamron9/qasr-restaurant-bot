@@ -21,9 +21,10 @@ body {
 	color: var(--tg-theme-text-color);
 }
 .drawer {
-	background-color: var(--tg-theme-bg-color) !important;
-
-	color: var(--tg-theme-text-color) !important;
+	/* background-color: var(--tg-theme-bg-color) !important; */
+	background-color: white;
+	color: black;
+	/* color: var(--tg-theme-text-color) !important; */
 	overflow-y: auto;
 }
 #root {

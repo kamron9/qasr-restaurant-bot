@@ -13,7 +13,7 @@ const BasketCard: FC<BasketCardProps> = ({ item }) => {
 		<div className={styles.basket_card}>
 			<div className={styles.basket_card__body}>
 				<img
-					src={item.images[0].image}
+					src={item.image}
 					alt={item.title}
 					className={styles.basket_card__img}
 				/>

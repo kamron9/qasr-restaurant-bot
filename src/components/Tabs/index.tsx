@@ -11,9 +11,7 @@ interface IProduct {
 	price: string
 	discount_percentage: number
 	real_price: number
-	images: {
-		image: string
-	}[]
+	image: string
 }
 
 interface ITab {
@@ -30,7 +28,7 @@ const Tabs = () => {
 	const getTabs = async () => {
 		try {
 			const response = await axios.get<ITab[]>(
-				'https://avtosavdo.chogirmali.uz/api/v1/shop/categories'
+				'https://qasr.chogirmali.uz/api/v1/shop/categories'
 			)
 			const data = await response?.data
 			setTabs(data)
@@ -45,7 +43,7 @@ const Tabs = () => {
 	const getProducts = async () => {
 		try {
 			const response = await axios.get<IProduct[]>(
-				'https://avtosavdo.chogirmali.uz/api/v1/shop/products'
+				'https://qasr.chogirmali.uz/api/v1/shop/products'
 			)
 			const data = await response.data
 			setProducts(data)

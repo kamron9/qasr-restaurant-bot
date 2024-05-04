@@ -15,19 +15,24 @@ export const productReducer = (state: any, action: any) => {
 					: product
 			)
 		case 'DECREMENT_PRODUCT_COUNT':
-			if (
-				state.find((product: ProductCartType) => product.id === action.id)
-					.count === 1
-			) {
-				return state.filter(
-					(product: ProductCartType) => product.id !== action.id
-				)
-			} else {
-				return state.map(
-					(product: ProductCartType) =>
-						product.id === action.id && { ...product, count: product.count - 1 }
-				)
-			}
+			return state.map((product: ProductCartType) =>
+				product.id === action.id
+					? { ...product, count: product.count - 1 }
+					: product
+			)
+		// if (
+		// 	state.find((product: ProductCartType) => product.id === action.id)
+		// 		.count === 1
+		// ) {
+		// 	return state.filter(
+		// 		(product: ProductCartType) => product.id !== action.id
+		// 	)
+		// } else {
+		// 	return state.map(
+		// 		(product: ProductCartType) =>
+		// 			product.id === action.id && { ...product, count: product.count - 1 }
+		// 	)
+		// }
 		default:
 			return state
 	}
