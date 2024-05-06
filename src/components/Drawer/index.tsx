@@ -28,7 +28,7 @@ const BasketDrawer = () => {
 						Orqaga
 					</button>
 					<h4>Savatcha</h4>
-					{basket?.length && Object.keys(user).length && <OrderModalTgUser />}
+					{basket?.length && <OrderModalTgUser />}
 				</div>
 				<div className={styles.total_price}>
 					<p>Umumiy summa: {convertPrice(calculateTotalPrice())} so'm</p>
