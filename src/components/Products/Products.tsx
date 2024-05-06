@@ -1,5 +1,6 @@
-import { useContext } from 'react'
-import { ProductContext } from '../../context/ProductProvider'
+import { useContext, useEffect } from 'react'
+
+import { IProduct, ProductContext } from '../../context/ProductProvider'
 import { convertPrice } from '../../utils/helpers'
 import styles from './product.module.css'
 
@@ -13,26 +14,16 @@ export interface ProductType {
 	image: string
 }
 
-const Product = ({ product }: { product: ProductType }) => {
-	const {
-		productState,
-		addToBasket,
-		incrementProductCount,
-		decrementProductCount,
-	} = useContext(ProductContext)
+const Product = ({ product }: { product: IProduct }) => {
+	const { basket, addToBasket, increment, decrement, removeFromBasket } =
+		useContext(ProductContext)
 
-	// get product and push it to basket
-	const handleProduct = () => {
-		addToBasket(product)
-	}
-
-	const increment = () => {
-		incrementProductCount(product.id)
-	}
-	// remove product from basket if count is 1
-	const decrement = () => {
-		decrementProductCount(product.id)
-	}
+	const productInBasket = basket.find(item => product.id === item.id)
+	useEffect(() => {
+		if (productInBasket?.count < 1) {
+			removeFromBasket(product)
+		}
+	}, [basket])
 
 	return (
 		<div className={styles.product}>
@@ -44,20 +35,27 @@ const Product = ({ product }: { product: ProductType }) => {
 			/>
 			<p className={styles.title}>{product.title}</p>
 			<p className={styles.price}>{convertPrice(product.price)} so'm</p>
-			{productState.find(item => item.id === product.id) ? (
+			{productInBasket?.count > 0 ? (
 				<div>
-					<button className={styles.decrement_btn} onClick={decrement}>
+					<button
+						className={styles.decrement_btn}
+						onClick={() => decrement(product)}
+					>
 						-
 					</button>
-					<span className={styles.product_count}>
-						{productState.find(item => item.id === product.id)?.count}
-					</span>
-					<button className={styles.increment_btn} onClick={increment}>
+					<span className={styles.product_count}>{productInBasket?.count}</span>
+					<button
+						className={styles.increment_btn}
+						onClick={() => increment(product)}
+					>
 						+
 					</button>
 				</div>
 			) : (
-				<button className={styles.add_basket_btn} onClick={handleProduct}>
+				<button
+					className={styles.add_basket_btn}
+					onClick={() => addToBasket(product)}
+				>
 					qo'shish
 				</button>
 			)}

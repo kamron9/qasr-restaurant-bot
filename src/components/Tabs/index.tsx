@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { ProductContext } from '../../context/ProductProvider'
 import Loader from '../Loader'
 import Product from '../Products/Products'
 import './tabs.css'
@@ -12,6 +13,7 @@ interface IProduct {
 	discount_percentage: number
 	real_price: number
 	image: string
+	count: number
 }
 
 interface ITab {
@@ -23,7 +25,7 @@ interface ITab {
 const Tabs = () => {
 	const [activeTab, setActiveTab] = useState<number>(0)
 	const [tabs, setTabs] = useState<ITab[]>([])
-	const [products, setProducts] = useState<IProduct[]>([])
+	const { products } = useContext(ProductContext)
 	//get category
 	const getTabs = async () => {
 		try {
@@ -40,22 +42,9 @@ const Tabs = () => {
 
 	//get Products
 
-	const getProducts = async () => {
-		try {
-			const response = await axios.get<IProduct[]>(
-				'https://qasr.chogirmali.uz/api/v1/shop/products'
-			)
-			const data = await response.data
-			setProducts(data)
-		} catch (error) {
-			console.error(error)
-		}
-	}
-
 	//filter by category
 	useEffect(() => {
 		getTabs()
-		getProducts()
 	}, [])
 	return (
 		<div className='tabs'>
@@ -70,11 +59,11 @@ const Tabs = () => {
 					</button>
 				))}
 			</div>
-			{products.length === 0 && <Loader />}
+			{products?.length === 0 && <Loader />}
 			<div className='tab-content'>
 				{products
-					.filter(product => product.category_id === activeTab)
-					.map(product => (
+					?.filter((product: IProduct) => product.category_id === activeTab)
+					.map((product: IProduct) => (
 						<Product key={product.id} product={product} />
 					))}
 			</div>

@@ -1,63 +1,119 @@
-import { createContext, useReducer } from 'react'
-import { ProductType } from '../components/Products/Products'
-import { productReducer } from '../reducers/productReducer'
+import axios from 'axios'
+import { createContext, useEffect, useState } from 'react'
 
-export type ProductCartType = ProductType & { count: number }
-
-interface ProductContextType {
-	productState: ProductCartType[]
-	addToBasket: (product: ProductType) => void
-	removeFromBasket: (product: ProductType) => void
-	totalPrice: () => number
-	incrementProductCount: (id: number) => void
-	decrementProductCount: (id: number) => void
+export interface IProduct {
+	category_id: number
+	id: number
+	title: string
+	price: string
+	discount_percentage: number
+	real_price: number
+	image: string
 }
 
-export const ProductContext = createContext<ProductContextType>({
-	productState: [],
+interface BasketType extends IProduct {
+	count: number
+}
+
+export interface ProductContextProps {
+	products: IProduct[]
+	basket: IProduct[]
+	addToBasket: (product: IProduct) => void
+	removeFromBasket: (product: IProduct) => void
+	calculateTotalPrice: () => number
+	increment: (product: IProduct) => void
+	decrement: (product: IProduct) => void
+}
+
+export const ProductContext = createContext<ProductContextProps>({
+	products: [],
+	basket: [],
 	addToBasket: () => {},
 	removeFromBasket: () => {},
-	totalPrice: () => 0,
-	incrementProductCount: () => {},
-	decrementProductCount: () => {},
+	calculateTotalPrice: () => 0,
+	increment: () => {},
+	decrement: () => {},
 })
 
-const ProductProvider = ({ children }: any) => {
-	const [productState, dispatch] = useReducer(productReducer, [])
+// Create the provider component
+const ProductProvider = ({ children }: { children: React.ReactNode }) => {
+	const [products, setProducts] = useState<IProduct[]>([])
+	const [basket, setBasket] = useState<BasketType[]>([])
 
-	const addToBasket = (product: ProductType) => {
-		dispatch({ type: 'ADD_TO_BASKET', product })
+	//add product to basket
+	const addToBasket = (product: IProduct) => {
+		const isProductInBasket = basket.some(p => p.id === product.id)
+
+		if (!isProductInBasket) {
+			const newBasket = [...basket, { ...product, count: 1 }]
+			setBasket(newBasket)
+		}
 	}
 
-	const removeFromBasket = (product: ProductType) => {
-		dispatch({ type: 'REMOVE_FROM_BASKET', id: product.id })
+	//remove product from basket
+	const removeFromBasket = (product: IProduct) => {
+		const newBasket = basket.filter(p => p.id !== product.id)
+
+		setBasket(newBasket)
 	}
 
-	const totalPrice = () => {
-		return productState.reduce(
-			(acc: number, item: ProductCartType) =>
-				acc + Number(item.price) * item.count,
-			0
+	const increment = (product: IProduct) => {
+		const newProductCount = basket.map((p: BasketType) =>
+			p.id === product.id ? { ...p, count: p.count + 1 } : p
 		)
+		setBasket(newProductCount)
+	}
+	const decrement = (product: IProduct) => {
+		const newProductCount = basket.map((p: BasketType) =>
+			p.id === product.id ? { ...p, count: p.count - 1 } : p
+		)
+		setBasket(newProductCount)
 	}
 
-	const incrementProductCount = (id: number) => {
-		dispatch({ type: 'INCREMENT_PRODUCT_COUNT', id })
+	//calculate total price
+	const calculateTotalPrice = () => {
+		return basket.reduce(
+			(total: any, product: any) => total + product.price * product.count,
+			0
+		) as number
 	}
-
-	const decrementProductCount = (id: number) => {
-		dispatch({ type: 'DECREMENT_PRODUCT_COUNT', id })
+	//get product
+	const getProducts = async () => {
+		try {
+			const response = await axios.get<IProduct[]>(
+				'https://qasr.chogirmali.uz/api/v1/shop/products'
+			)
+			const data = await response.data
+			const product = data.map((product: IProduct) => {
+				return {
+					category_id: product.category_id,
+					discount_percentage: product.discount_percentage,
+					id: product.id,
+					image: product.image,
+					price: product.price,
+					real_price: product.real_price,
+					title: product.title,
+				}
+			})
+			setProducts(product)
+		} catch (error) {
+			console.error(error)
+		}
 	}
+	useEffect(() => {
+		getProducts()
+	}, [])
 
 	return (
 		<ProductContext.Provider
 			value={{
-				productState,
+				products,
+				basket,
 				addToBasket,
 				removeFromBasket,
-				totalPrice,
-				incrementProductCount,
-				decrementProductCount,
+				calculateTotalPrice,
+				increment,
+				decrement,
 			}}
 		>
 			{children}

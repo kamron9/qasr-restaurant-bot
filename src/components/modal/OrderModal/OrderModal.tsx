@@ -8,7 +8,7 @@ import styles from './order.module.css'
 const OrderModalTgUser = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 	const { user } = useContext(TgUserContext)
-	const { productState } = useContext(ProductContext)
+	const { basket } = useContext(ProductContext)
 
 	const postData = async (data: any) => {
 		try {
@@ -31,7 +31,7 @@ const OrderModalTgUser = () => {
 
 	const handleData = (e: any) => {
 		e.preventDefault()
-		const data = productState.map(item => {
+		const data = basket?.map((item: any) => {
 			return {
 				product: item.id,
 				count: item.count,
