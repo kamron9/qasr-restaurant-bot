@@ -27,20 +27,26 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		const tg = window.Telegram?.WebApp
-
+		//get telegram user id
 		const id = tg?.initDataUnsafe?.user?.id
-		try {
-			axios
-				.post(`https://qasr.chogirmali.uz/api/v1/users/auth`, {
-					telegram_id: id,
-					// phone_number: localStorage.getItem('phone'),
-				})
-				.then(data => {
-					setUser(data.data)
-				})
-		} catch (error) {
-			setIsUserBlocked(error)
+
+		//get user by telegram id
+		const getTgUser = async () => {
+			try {
+				const response = await axios.post(
+					`https://qasr.chogirmali.uz/api/v1/users/auth`,
+					{
+						telegram_id: id,
+						// phone_number: localStorage.getItem('phone'),
+					}
+				)
+				const data = response.data
+				setUser(data)
+			} catch (error) {
+				setIsUserBlocked(error)
+			}
 		}
+		getTgUser()
 	}, [])
 
 	return (
