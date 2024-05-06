@@ -43,7 +43,10 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 				const data = await response.data
 				setUser(data)
 			} catch (error: any) {
-				setIsUserBlocked(error.response)
+				setIsUserBlocked({
+					data: error.response,
+					status: error.response.status,
+				})
 			}
 		}
 		getTgUser()
