@@ -1,10 +1,10 @@
 import { FC, useContext } from 'react'
-import { IProduct, ProductContext } from '../../context/ProductProvider'
+import { BasketType, ProductContext } from '../../context/ProductProvider'
 import { convertPrice } from '../../utils/helpers'
 import styles from './basket.module.css'
 
 interface BasketCardProps {
-	item: IProduct
+	item: BasketType
 }
 
 const BasketCard: FC<BasketCardProps> = ({ item }) => {

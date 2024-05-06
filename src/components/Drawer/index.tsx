@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { DrawerContext } from '../../context/DrawerContext'
-import { IProduct, ProductContext } from '../../context/ProductProvider'
+import { ProductContext } from '../../context/ProductProvider'
 import { convertPrice } from '../../utils/helpers'
 import BasketCard from '../BasketCard'
 import OrderModalTgUser from '../modal/OrderModal/OrderModal'
@@ -32,9 +32,7 @@ const BasketDrawer = () => {
 					<p>Umumiy summa: {convertPrice(calculateTotalPrice())} so'm</p>
 				</div>
 				{basket?.length ? (
-					basket?.map((item: IProduct) => (
-						<BasketCard key={item.id} item={item} />
-					))
+					basket?.map(item => <BasketCard key={item.id} item={item} />)
 				) : (
 					<div className={styles.empty_basket}>
 						<p>Savatcha bo'sh</p>

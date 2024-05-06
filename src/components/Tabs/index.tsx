@@ -13,13 +13,11 @@ interface IProduct {
 	discount_percentage: number
 	real_price: number
 	image: string
-	count: number
 }
 
 interface ITab {
 	id: number
 	title: string
-	image: string
 }
 
 const Tabs = () => {
@@ -49,9 +47,9 @@ const Tabs = () => {
 	return (
 		<div className='tabs'>
 			<div className='tab-list'>
-				{tabs.map((tab, index) => (
+				{tabs.map((tab: ITab) => (
 					<button
-						key={index}
+						key={tab.id}
 						className={`tab-button ${activeTab === tab.id ? 'active' : ''}`}
 						onClick={() => setActiveTab(tab.id)}
 					>

@@ -11,13 +11,13 @@ export interface IProduct {
 	image: string
 }
 
-interface BasketType extends IProduct {
+export interface BasketType extends IProduct {
 	count: number
 }
 
 export interface ProductContextProps {
 	products: IProduct[]
-	basket: IProduct[]
+	basket: BasketType[]
 	addToBasket: (product: IProduct) => void
 	removeFromBasket: (product: IProduct) => void
 	calculateTotalPrice: () => number
@@ -42,7 +42,9 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
 
 	//add product to basket
 	const addToBasket = (product: IProduct) => {
-		const isProductInBasket = basket.some(p => p.id === product.id)
+		const isProductInBasket = basket.some(
+			(p: BasketType) => p.id === product.id
+		)
 
 		if (!isProductInBasket) {
 			const newBasket = [...basket, { ...product, count: 1 }]
@@ -52,7 +54,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
 
 	//remove product from basket
 	const removeFromBasket = (product: IProduct) => {
-		const newBasket = basket.filter(p => p.id !== product.id)
+		const newBasket = basket.filter((p: BasketType) => p.id !== product.id)
 
 		setBasket(newBasket)
 	}

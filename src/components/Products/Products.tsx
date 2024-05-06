@@ -18,7 +18,8 @@ const Product = ({ product }: { product: IProduct }) => {
 	const { basket, addToBasket, increment, decrement, removeFromBasket } =
 		useContext(ProductContext)
 
-	const productInBasket = basket.find(item => product.id === item.id)
+	const productInBasket: any = basket.find(item => product.id === item.id)
+
 	useEffect(() => {
 		if (productInBasket?.count < 1) {
 			removeFromBasket(product)
