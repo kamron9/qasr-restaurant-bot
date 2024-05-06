@@ -13,9 +13,6 @@ declare global {
 }
 
 const Home = () => {
-	const tg = window.Telegram?.WebApp
-	const phone = localStorage.getItem('phone') || ''
-
 	const { basket } = useContext(ProductContext)
 	const { toggleDrawer } = useContext(DrawerContext)
 	const { user, isUserBlocked } = useContext(TgUserContext)
