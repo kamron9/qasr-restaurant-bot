@@ -40,7 +40,7 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 						// phone_number: localStorage.getItem('phone'),
 					}
 				)
-				const data = response.data
+				const data = await response.data
 				setUser(data)
 			} catch (error) {
 				setIsUserBlocked(error)
