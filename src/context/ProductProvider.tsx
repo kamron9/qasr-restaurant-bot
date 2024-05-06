@@ -102,7 +102,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
 			})
 			setProducts(product)
 		} catch (error) {
-			setUserIsBlocked(error instanceof Error ? error.message : error)
+			setUserIsBlocked(error instanceof Error)
 		}
 	}
 	useEffect(() => {
