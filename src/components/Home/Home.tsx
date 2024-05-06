@@ -23,15 +23,17 @@ const Home = () => {
 	}, [])
 	//tg?.initDataUnsafe?.user?.id
 	const isUserExist = tg?.initDataUnsafe?.user?.id || phone
-	const { basket } = useContext(ProductContext)
+	const { basket, userIsBlocked } = useContext(ProductContext)
 	const { toggleDrawer } = useContext(DrawerContext)
 	const { user } = useContext(TgUserContext)
+
 	return (
 		<div>
 			{!isUserExist && <AuthModal />}
 			<div className={styles.top_header}>
 				<h3>Qasr Restarani</h3>
 				{JSON.stringify(user)}
+				{JSON.stringify(userIsBlocked)}
 				<button className={styles.top_header__btn} onClick={toggleDrawer}>
 					Savatcha: {basket?.length}
 				</button>
