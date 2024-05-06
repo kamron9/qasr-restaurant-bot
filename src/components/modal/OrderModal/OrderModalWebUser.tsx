@@ -1,26 +1,22 @@
 import axios from 'axios'
 import { useContext, useState } from 'react'
 import CloseIcon from '../../../assets/CloseIcon'
-import { ProductContext } from '../../../context/ProductProvider'
-import { TgUserContext } from '../../../context/TgUserContext'
+import { BasketType, ProductContext } from '../../../context/ProductProvider'
 import styles from './order.module.css'
 
-const OrderModalTgUser = () => {
+const OrderModalWebUser = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-	const { user } = useContext(TgUserContext)
 	const { basket } = useContext(ProductContext)
+	const [phone, setPhone] = useState<string>('')
+	const userPhoneNumber = localStorage.getItem('phone') || ''
 
 	const postData = async (data: any) => {
 		try {
-			await axios.post(
-				'https://avtosavdo.chogirmali.uz/api/v1/shop/orders',
-				data,
-				{
-					headers: {
-						Authorization: user.phone_number,
-					},
-				}
-			)
+			await axios.post('https://qasr.chogirmali.uz/api/v1/shop/orders', data, {
+				headers: {
+					Authorization: userPhoneNumber,
+				},
+			})
 
 			const tg = window.Telegram?.WebApp
 			tg.close()
@@ -31,19 +27,21 @@ const OrderModalTgUser = () => {
 
 	const handleData = (e: any) => {
 		e.preventDefault()
-		const data = basket?.map((item: any) => {
+		const data = basket?.map((item: BasketType) => {
 			return {
 				product: item.id,
 				count: item.count,
 			}
 		})
+
 		postData({
 			orders: data,
 			delivery_type: 'delivery',
 			address: e.target.address.value,
+			secondary_phone_number: `+998${phone}`,
+			full_name: e.target.username.value,
 		})
 	}
-
 	return (
 		<>
 			<button className={styles.order_btn} onClick={() => setIsModalOpen(true)}>
@@ -80,39 +78,41 @@ const OrderModalTgUser = () => {
 						{/* qo'shimcha raqam */}
 						<div className={styles.form_group}>
 							<p className={styles.bold_text}>
-								Telefon raqamingiz: <span>{user.phone_number}</span>
+								Telefon raqamingiz: <span>{userPhoneNumber}</span>
 							</p>
 
 							<label className={styles.form_label} htmlFor='other-phone'>
 								Qo'shimcha raqam (ixtiyoriy)
 							</label>
-							<input
-								className={styles.form_input}
-								type='tel'
-								id='other-phone'
-							/>
+
+							<div className={styles.form_group_phone}>
+								<span className={styles.form_group_addOn}>+998</span>
+								<input
+									type='tel'
+									minLength={9}
+									id='input'
+									name='phone'
+									maxLength={9}
+									value={phone.replace(/\D/g, '')}
+									onChange={e => setPhone(e.target.value)}
+									required
+									className={styles.form_input_phone}
+								/>
+							</div>
 						</div>
 						{/* adress */}
 						<div className={styles.form_group}>
 							<label className={styles.form_label} htmlFor='address'>
-								Manzilni tanlang:
+								Manzil kiriting:
 							</label>
-							<select
-								className={styles.form_select}
-								name='address'
-								id='address'
-							>
-								{user?.addresses?.map((item: any) => (
-									<option key={item.id} value={item.id}>
-										{item?.address}
-									</option>
-								))}
-							</select>
+
+							<input type='text' name='address' className={styles.form_input} />
+							<p className={styles.form_warning_msg}>
+								etibor bering dastavka xizmatimiz faqat Qo'shko'pir tumani
+								bo'ylab mavjud
+							</p>
 						</div>
-						<p className={styles.form_warning_msg}>
-							Qo'shimcha manzil kiritish uchun telegram botga yangi manzilni
-							yuboring
-						</p>
+
 						<button className={styles.order_submit_btn} type='submit'>
 							Buyurtma berish
 						</button>
@@ -123,4 +123,4 @@ const OrderModalTgUser = () => {
 	)
 }
 
-export default OrderModalTgUser
+export default OrderModalWebUser

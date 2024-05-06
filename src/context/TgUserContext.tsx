@@ -44,9 +44,10 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		const tg = window.Telegram?.WebApp
-		//get telegram user id
+
 		const id = tg?.initDataUnsafe?.user?.id
-		if (id) {
+		const user = localStorage.getItem('phone') as any
+		if (id || user?.length > 0) {
 			getTgUser()
 		}
 	}, [])

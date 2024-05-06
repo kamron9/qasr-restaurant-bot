@@ -104,3 +104,34 @@
 	color: red;
 	font-size: 0.8rem;
 }
+
+.form_group_phone {
+	display: flex;
+	align-items: center;
+	border-radius: 0.375rem;
+	/* overflow: hidden; */
+	border: 1px solid #d1d5db;
+}
+.form_group_addOn {
+	padding: 0.5rem;
+	background-color: #d1d5db;
+}
+.form_input_phone {
+	padding: 0.5rem;
+	border: none;
+	outline: none;
+	font-size: 1rem;
+	flex: 1 1 auto;
+	padding: 0.5rem;
+	border: none;
+	border-radius: 5px;
+	font-size: 1rem;
+	color: #333;
+}
+.form_input:focus,
+.form_input_phone:focus {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #2563eb;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
+}
