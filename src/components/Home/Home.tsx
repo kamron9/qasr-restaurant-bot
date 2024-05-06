@@ -33,11 +33,11 @@ const Home = () => {
 			<div className={styles.top_header}>
 				<h3>Qasr Restarani</h3>
 				{JSON.stringify(user)}
-				{JSON.stringify(isUserBlocked)}
 				<button className={styles.top_header__btn} onClick={toggleDrawer}>
 					Savatcha: {basket?.length}
 				</button>
 			</div>
+			<b className={styles.error_msg}>{isUserBlocked}</b>
 			<Tabs />
 			<BasketDrawer />
 		</div>

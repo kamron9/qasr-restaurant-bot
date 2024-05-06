@@ -37,16 +37,13 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 					`https://qasr.chogirmali.uz/api/v1/users/auth`,
 					{
 						telegram_id: id,
-						// phone_number: localStorage.getItem('phone'),
+						phone_number: localStorage.getItem('phone'),
 					}
 				)
 				const data = await response.data
 				setUser(data)
 			} catch (error: any) {
-				setIsUserBlocked({
-					data: error.response.data,
-					status: error.response.status,
-				})
+				setIsUserBlocked(error.response.data.errors[0].detail)
 			}
 		}
 		getTgUser()

@@ -3,6 +3,7 @@ import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { DrawerContext } from '../../context/DrawerContext'
 import { ProductContext } from '../../context/ProductProvider'
+import { TgUserContext } from '../../context/TgUserContext'
 import { convertPrice } from '../../utils/helpers'
 import BasketCard from '../BasketCard'
 import OrderModalTgUser from '../modal/OrderModal/OrderModal'
@@ -11,6 +12,7 @@ import styles from './drawer.module.css'
 const BasketDrawer = () => {
 	const { isOpen, toggleDrawer } = useContext(DrawerContext)
 	const { basket, calculateTotalPrice } = useContext(ProductContext)
+	const { user } = useContext(TgUserContext)
 
 	return (
 		<>
@@ -26,7 +28,7 @@ const BasketDrawer = () => {
 						Orqaga
 					</button>
 					<h4>Savatcha</h4>
-					{basket?.length && <OrderModalTgUser />}
+					{basket?.length && Object.keys(user).length && <OrderModalTgUser />}
 				</div>
 				<div className={styles.total_price}>
 					<p>Umumiy summa: {convertPrice(calculateTotalPrice())} so'm</p>
