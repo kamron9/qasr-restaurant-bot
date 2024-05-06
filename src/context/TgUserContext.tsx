@@ -12,36 +12,39 @@ import { createContext, useEffect, useState } from 'react'
 interface TgContextType {
 	user: any
 	setUser: any
+	isUserBlocked?: any
 }
 
 export const TgUserContext = createContext<TgContextType>({
 	user: {},
 	setUser: () => {},
+	isUserBlocked: '',
 })
 
 const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 	const [user, setUser] = useState({})
+	const [isUserBlocked, setIsUserBlocked] = useState<any>('')
 
 	useEffect(() => {
 		const tg = window.Telegram?.WebApp
 
 		const id = tg?.initDataUnsafe?.user?.id
-		axios
-			.post(
-				`https://qasr.chogirmali.uz/api/v1/users/auth
-			`,
-				{
+		try {
+			axios
+				.post(`https://qasr.chogirmali.uz/api/v1/users/auth`, {
 					telegram_id: id,
 					// phone_number: localStorage.getItem('phone'),
-				}
-			)
-			.then(data => {
-				setUser(data.data)
-			})
+				})
+				.then(data => {
+					setUser(data.data)
+				})
+		} catch (error) {
+			setIsUserBlocked(error)
+		}
 	}, [])
 
 	return (
-		<TgUserContext.Provider value={{ user, setUser }}>
+		<TgUserContext.Provider value={{ user, setUser, isUserBlocked }}>
 			{children}
 		</TgUserContext.Provider>
 	)

@@ -23,7 +23,6 @@ export interface ProductContextProps {
 	calculateTotalPrice: () => number
 	increment: (product: IProduct) => void
 	decrement: (product: IProduct) => void
-	userIsBlocked: any
 }
 
 export const ProductContext = createContext<ProductContextProps>({
@@ -34,14 +33,12 @@ export const ProductContext = createContext<ProductContextProps>({
 	calculateTotalPrice: () => 0,
 	increment: () => {},
 	decrement: () => {},
-	userIsBlocked: '',
 })
 
 // Create the provider component
 const ProductProvider = ({ children }: { children: React.ReactNode }) => {
 	const [products, setProducts] = useState<IProduct[]>([])
 	const [basket, setBasket] = useState<BasketType[]>([])
-	const [userIsBlocked, setUserIsBlocked] = useState<any>('')
 
 	//add product to basket
 	const addToBasket = (product: IProduct) => {
@@ -102,7 +99,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
 			})
 			setProducts(product)
 		} catch (error) {
-			setUserIsBlocked(error instanceof Error)
+			console.log(error instanceof Error)
 		}
 	}
 	useEffect(() => {
@@ -119,7 +116,6 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
 				calculateTotalPrice,
 				increment,
 				decrement,
-				userIsBlocked,
 			}}
 		>
 			{children}

@@ -23,9 +23,9 @@ const Home = () => {
 	}, [])
 	//tg?.initDataUnsafe?.user?.id
 	const isUserExist = tg?.initDataUnsafe?.user?.id || phone
-	const { basket, userIsBlocked } = useContext(ProductContext)
+	const { basket } = useContext(ProductContext)
 	const { toggleDrawer } = useContext(DrawerContext)
-	const { user } = useContext(TgUserContext)
+	const { user, isUserBlocked } = useContext(TgUserContext)
 
 	return (
 		<div>
@@ -33,7 +33,7 @@ const Home = () => {
 			<div className={styles.top_header}>
 				<h3>Qasr Restarani</h3>
 				{JSON.stringify(user)}
-				{JSON.stringify(userIsBlocked)}
+				{JSON.stringify(isUserBlocked)}
 				<button className={styles.top_header__btn} onClick={toggleDrawer}>
 					Savatcha: {basket?.length}
 				</button>
