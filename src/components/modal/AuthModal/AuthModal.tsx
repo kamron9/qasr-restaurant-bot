@@ -1,14 +1,17 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './auth.module.css'
 
 import 'react-modern-drawer/dist/index.css'
+import { TgUserContext } from '../../../context/TgUserContext'
 
 const AuthModal = () => {
 	const [isOpen, setIsOpen] = useState(true)
 	const [input, setInput] = useState('')
+	const { sendUser } = useContext(TgUserContext)
 
 	const handleInput = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		sendUser(`+998${input}`)
 		localStorage.setItem('phone', `+998${input}`)
 		setIsOpen(false)
 	}
