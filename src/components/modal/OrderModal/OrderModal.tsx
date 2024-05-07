@@ -2,13 +2,16 @@ import axios from 'axios'
 import { useContext, useState } from 'react'
 import CloseIcon from '../../../assets/CloseIcon'
 import { BasketType, ProductContext } from '../../../context/ProductProvider'
+import { TgUserContext } from '../../../context/TgUserContext'
 import styles from './order.module.css'
 
-const OrderModalWebUser = () => {
+const OrderModal = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 	const { basket } = useContext(ProductContext)
 	const [phone, setPhone] = useState<string>('')
+	const { user } = useContext(TgUserContext)
 	const userPhoneNumber = localStorage.getItem('phone') || ''
+	const isTgUserExist = user?.telegram_id ? true : false
 
 	const postData = async (data: any) => {
 		try {
@@ -74,7 +77,7 @@ const OrderModalWebUser = () => {
 								className={styles.form_input}
 							/>
 						</div>
-						{/* telefon number */}
+
 						{/* qo'shimcha raqam */}
 						<div className={styles.form_group}>
 							<p className={styles.bold_text}>
@@ -101,17 +104,45 @@ const OrderModalWebUser = () => {
 							</div>
 						</div>
 						{/* adress */}
-						<div className={styles.form_group}>
-							<label className={styles.form_label} htmlFor='address'>
-								Manzil kiriting:
-							</label>
+						{isTgUserExist ? (
+							<div className={styles.form_group}>
+								<label className={styles.form_label} htmlFor='address'>
+									Manzilni tanlang:
+								</label>
+								<select
+									className={styles.form_select}
+									name='address'
+									id='address'
+								>
+									{user?.addresses?.map((item: any) => (
+										<option key={item.id} value={item.id}>
+											{item?.address}
+										</option>
+									))}
+								</select>
+								<p className={styles.form_warning_msg}>
+									Qo'shimcha manzil kiritish uchun botga yangi manzil jo'nating
+								</p>
+							</div>
+						) : (
+							<div className={styles.form_group}>
+								<label className={styles.form_label} htmlFor='address'>
+									Manzil kiriting:
+								</label>
 
-							<input type='text' name='address' className={styles.form_input} />
-							<p className={styles.form_warning_msg}>
-								etibor bering dastavka xizmatimiz faqat Qo'shko'pir tumani
-								bo'ylab mavjud
-							</p>
-						</div>
+								<input
+									type='text'
+									name='address'
+									className={styles.form_input}
+								/>
+								{!isTgUserExist && (
+									<p className={styles.form_warning_msg}>
+										E'tibor bering dastavka xizmatimiz faqat Qo'shko'pir tumani
+										bo'ylab mavjud
+									</p>
+								)}
+							</div>
+						)}
 
 						<button className={styles.order_submit_btn} type='submit'>
 							Buyurtma berish
@@ -123,4 +154,4 @@ const OrderModalWebUser = () => {
 	)
 }
 
-export default OrderModalWebUser
+export default OrderModal
