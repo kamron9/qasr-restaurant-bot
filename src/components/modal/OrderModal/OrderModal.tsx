@@ -10,7 +10,7 @@ const OrderModal = () => {
 	const { basket } = useContext(ProductContext)
 	const [phone, setPhone] = useState<string>('')
 	const { user } = useContext(TgUserContext)
-	const userPhoneNumber = localStorage.getItem('phone') || ''
+	const userPhoneNumber = localStorage.getItem('phone') || user?.phone_number
 	const isTgUserExist = user?.telegram_id ? true : false
 
 	const postData = async (data: any) => {
