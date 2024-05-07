@@ -19,10 +19,11 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 	const [user, setUser] = useState({})
 	const [isUserBlocked, setIsUserBlocked] = useState<any>('')
 
+	const tg = window.Telegram?.WebApp
+	//get telegram user id
+	const id = tg?.initDataUnsafe?.user?.id
+
 	const getTgUser = async (phone?: string) => {
-		const tg = window.Telegram?.WebApp
-		//get telegram user id
-		const id = tg?.initDataUnsafe?.user?.id
 		try {
 			const response = await axios.post(
 				`https://qasr.chogirmali.uz/api/v1/users/auth`,
@@ -34,7 +35,8 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 			const data = await response.data
 			setUser(data)
 		} catch (error: any) {
-			setIsUserBlocked(error.response.data.errors[0].detail)
+			// error.response.data.errors[0].detail
+			setIsUserBlocked(error)
 		}
 	}
 
@@ -43,14 +45,13 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 	}
 
 	useEffect(() => {
-		const tg = window.Telegram?.WebApp
+		tg.ready()
 
-		const id = tg?.initDataUnsafe?.user?.id
 		const user = localStorage.getItem('phone') as any
 		if (id || user?.length > 0) {
 			getTgUser()
 		}
-	}, [])
+	}, [id])
 
 	return (
 		<TgUserContext.Provider value={{ user, setUser, isUserBlocked, sendUser }}>
