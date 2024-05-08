@@ -13,8 +13,10 @@ const BasketDrawer = () => {
 	const { isOpen, toggleDrawer } = useContext(DrawerContext)
 	const { basket, calculateTotalPrice } = useContext(ProductContext)
 	const { user } = useContext(TgUserContext)
+	const phone = localStorage.getItem('phone') || ''
 	const isBasketExist = basket?.length > 0
-	const isUserExist = localStorage.getItem('phone') || user?.phone_number
+
+	const isUserExist = phone?.length > 0 || user?.phone_number.length > 0
 
 	return (
 		<>
