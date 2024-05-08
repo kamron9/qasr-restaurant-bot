@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
+import { baseUrl } from '../utils/consts'
 
 export interface IProduct {
 	category_id: number
@@ -84,9 +85,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
 	//get product
 	const getProducts = async () => {
 		try {
-			const response = await axios.get<IProduct[]>(
-				'https://qasr.chogirmali.uz/api/v1/shop/products'
-			)
+			const response = await axios.get<IProduct[]>(`${baseUrl}/shop/products`)
 			const data = await response.data
 			const product = data.map((product: IProduct) => {
 				return {

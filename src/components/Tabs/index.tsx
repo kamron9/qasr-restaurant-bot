@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 import { ProductContext } from '../../context/ProductProvider'
+import { baseUrl } from '../../utils/consts'
 import Loader from '../Loader'
 import Product from '../Products/Products'
 import './tabs.css'
@@ -27,9 +28,7 @@ const Tabs = () => {
 	//get category
 	const getTabs = async () => {
 		try {
-			const response = await axios.get<ITab[]>(
-				'https://qasr.chogirmali.uz/api/v1/shop/categories'
-			)
+			const response = await axios.get<ITab[]>(`${baseUrl}/shop/categories`)
 			const data = await response?.data
 			setTabs(data)
 			setActiveTab(data[0].id)

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
+import { baseUrl } from '../utils/consts'
 
 interface TgContextType {
 	user: any
@@ -25,13 +26,10 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 
 	const getTgUser = async (phone?: string) => {
 		try {
-			const response = await axios.post(
-				`https://qasr.chogirmali.uz/api/v1/users/auth`,
-				{
-					telegram_id: id,
-					phone_number: phone || localStorage.getItem('phone'),
-				}
-			)
+			const response = await axios.post(`${baseUrl}/users/auth`, {
+				telegram_id: id,
+				phone_number: phone || localStorage.getItem('phone'),
+			})
 			const data = await response.data
 			setUser(data)
 		} catch (error: any) {
