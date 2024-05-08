@@ -19,6 +19,8 @@
 	color: var(--tg-theme-text-color);
 	box-shadow: inset 0 0 0 3px #ccc;
 	border-radius: 22px;
+	transition: all 0.3s;
+	font-weight: bold;
 }
 
 .tab-button.active {

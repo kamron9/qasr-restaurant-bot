@@ -37,7 +37,7 @@ const Product = ({ product }: { product: IProduct }) => {
 			<p className={styles.title}>{product.title}</p>
 			<p className={styles.price}>{convertPrice(product.price)} so'm</p>
 			{productInBasket?.count > 0 ? (
-				<div>
+				<div className={styles.product_actions}>
 					<button
 						className={styles.decrement_btn}
 						onClick={() => decrement(product)}
