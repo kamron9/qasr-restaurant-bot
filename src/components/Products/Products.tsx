@@ -28,12 +28,15 @@ const Product = ({ product }: { product: IProduct }) => {
 
 	return (
 		<div className={styles.product}>
-			<img
-				src={product?.image}
-				height={200}
-				alt={product.title}
-				className={styles.image}
-			/>
+			<div className={styles.product_inner}>
+				<img
+					src={product?.image}
+					height={200}
+					alt={product.title}
+					className={styles.image}
+				/>
+			</div>
+
 			<p className={styles.title}>{product.title}</p>
 			<p className={styles.price}>{convertPrice(product.price)} so'm</p>
 			{productInBasket?.count > 0 ? (

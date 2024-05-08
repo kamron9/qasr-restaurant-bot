@@ -33,7 +33,13 @@
 	border-top: var(--border);
 
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 	grid-gap: 5px;
 	padding-bottom: 70px;
+}
+
+@media screen and (min-width: 800px) {
+	.tab-content {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	}
 }

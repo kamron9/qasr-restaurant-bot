@@ -26,7 +26,10 @@ const Home = () => {
 					Savatcha: {basket?.length}
 				</button>
 			</div>
-			<b className={styles.error_msg}>{JSON.stringify(isUserBlocked)}</b>
+			{!isUserBlocked && (
+				<b className={styles.error_msg}>{JSON.stringify(isUserBlocked)}</b>
+			)}
+
 			<Tabs />
 			<BasketDrawer />
 		</div>

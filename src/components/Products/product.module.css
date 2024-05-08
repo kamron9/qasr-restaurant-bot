@@ -1,17 +1,27 @@
 .product {
 	border: var(--border);
 	border-radius: 0.5rem;
-	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	padding: 15px;
+	overflow: hidden;
+	height: 100%;
 }
 
+.product_inner {
+	position: relative;
+	height: 120px;
+}
 .image {
-	width: 100%;
-	object-fit: contain;
-	height: 100px;
-	border-radius: 0.5rem;
+	width: 0px;
+	height: 0px;
+	border-radius: 12px;
+	max-width: 100%;
+	min-width: 100%;
+	max-height: 100%;
+	min-height: 100%;
+	object-fit: cover;
 }
 
 .content {
@@ -19,12 +29,12 @@
 }
 
 .title {
-	margin-bottom: 3px;
+	margin: 3px 0;
 	display: -webkit-box;
 	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-	font-size: 15px;
+	/* font-size: 17px; */
 }
 
 .price {
