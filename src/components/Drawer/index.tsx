@@ -16,7 +16,7 @@ const BasketDrawer = () => {
 	const phone = localStorage.getItem('phone') || ''
 	const isBasketExist = basket?.length > 0
 
-	const isUserExist = phone?.length > 0 || user?.phone_number.length > 0
+	const isUserExist = phone?.length > 0 || user?.phone_number?.length > 0
 
 	return (
 		<>
