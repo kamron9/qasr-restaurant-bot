@@ -1,17 +1,19 @@
 import axios from 'axios'
 import { useContext, useState } from 'react'
 import CloseIcon from '../../../assets/CloseIcon'
+import { DrawerContext } from '../../../context/DrawerContext'
 import { BasketType, ProductContext } from '../../../context/ProductProvider'
 import { TgUserContext } from '../../../context/TgUserContext'
 import styles from './order.module.css'
 
 const OrderModal = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-	const { basket } = useContext(ProductContext)
+	const { basket, setBasket } = useContext(ProductContext)
 	const [phone, setPhone] = useState<string>('')
 	const { user } = useContext(TgUserContext)
 	const userPhoneNumber = localStorage.getItem('phone') || user?.phone_number
 	const isTgUserExist = user?.telegram_id ? true : false
+	const { setIsOpen } = useContext(DrawerContext)
 
 	const postData = async (data: any) => {
 		try {
@@ -23,6 +25,10 @@ const OrderModal = () => {
 
 			const tg = window.Telegram?.WebApp
 			tg.close()
+			setIsModalOpen(false)
+			setIsOpen(false)
+			setBasket([])
+			alert("Zakazingiz qabul qilindi yaqin orada siz bilan bog'lanishadi")
 		} catch (err) {
 			console.log(err)
 		}
@@ -30,6 +36,7 @@ const OrderModal = () => {
 
 	const handleData = (e: any) => {
 		e.preventDefault()
+		e.target.submitBtn.disabled = true
 		const data = basket?.map((item: BasketType) => {
 			return {
 				product: item.id,
@@ -131,6 +138,7 @@ const OrderModal = () => {
 
 								<input
 									type='text'
+									required
 									name='address'
 									className={styles.form_input}
 								/>
@@ -143,7 +151,11 @@ const OrderModal = () => {
 							</div>
 						)}
 
-						<button className={styles.order_submit_btn} type='submit'>
+						<button
+							className={styles.order_submit_btn}
+							name='submitBtn'
+							type='submit'
+						>
 							Buyurtma berish
 						</button>
 					</form>

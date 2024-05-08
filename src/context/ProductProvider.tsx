@@ -23,6 +23,7 @@ export interface ProductContextProps {
 	calculateTotalPrice: () => number
 	increment: (product: IProduct) => void
 	decrement: (product: IProduct) => void
+	setBasket: (basket: BasketType[] | []) => void
 }
 
 export const ProductContext = createContext<ProductContextProps>({
@@ -33,6 +34,7 @@ export const ProductContext = createContext<ProductContextProps>({
 	calculateTotalPrice: () => 0,
 	increment: () => {},
 	decrement: () => {},
+	setBasket: () => {},
 })
 
 // Create the provider component
@@ -116,6 +118,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
 				calculateTotalPrice,
 				increment,
 				decrement,
+				setBasket,
 			}}
 		>
 			{children}

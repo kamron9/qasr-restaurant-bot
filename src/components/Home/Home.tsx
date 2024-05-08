@@ -15,13 +15,13 @@ declare global {
 const Home = () => {
 	const { basket } = useContext(ProductContext)
 	const { toggleDrawer } = useContext(DrawerContext)
-	const { user, isUserBlocked } = useContext(TgUserContext)
+	const { isUserBlocked } = useContext(TgUserContext)
 
 	return (
 		<div>
 			<div className={styles.top_header}>
 				<h3>Qasr Restarani</h3>
-				<div style={{ color: 'blue' }}>{JSON.stringify(user)}</div>
+				{/* <div style={{ color: 'blue' }}>{JSON.stringify(user)}</div> */}
 				<button className={styles.top_header__btn} onClick={toggleDrawer}>
 					Savatcha: {basket?.length}
 				</button>
