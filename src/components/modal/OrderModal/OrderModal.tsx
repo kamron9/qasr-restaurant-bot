@@ -98,7 +98,6 @@ const OrderModal = () => {
 									maxLength={9}
 									value={phone.replace(/\D/g, '')}
 									onChange={e => setPhone(e.target.value)}
-									required
 									className={styles.form_input_phone}
 								/>
 							</div>
@@ -115,7 +114,7 @@ const OrderModal = () => {
 									id='address'
 								>
 									{user?.addresses?.map((item: any) => (
-										<option key={item.id} value={item.id}>
+										<option key={item.id} value={item.address}>
 											{item?.address}
 										</option>
 									))}
