@@ -18,7 +18,7 @@ export const TgUserContext = createContext<TgContextType>({
 
 const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 	const [user, setUser] = useState({})
-	const [isUserBlocked, setIsUserBlocked] = useState<any>('')
+	const [isUserBlocked, setIsUserBlocked] = useState<any>(false)
 
 	const tg = window.Telegram?.WebApp
 	//get telegram user id
@@ -32,9 +32,10 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 			})
 			const data = await response.data
 			setUser(data)
+			setIsUserBlocked(data.is_blocked)
 		} catch (error: any) {
 			// error.response.data.errors[0].detail
-			setIsUserBlocked(error)
+			console.log(error)
 		}
 	}
 

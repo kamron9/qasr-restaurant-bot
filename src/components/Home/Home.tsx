@@ -26,8 +26,11 @@ const Home = () => {
 					Savatcha: {basket?.length}
 				</button>
 			</div>
-			{!isUserBlocked && (
-				<b className={styles.error_msg}>{JSON.stringify(isUserBlocked)}</b>
+			{isUserBlocked && (
+				<b className={styles.error_msg}>
+					Bekor qilingan buyurtmalaringiz 3 ta bo'lganligi uchun siz admin
+					tomonidan bloklangansiz va botdan foydalana olmaysiz.
+				</b>
 			)}
 
 			<Tabs />

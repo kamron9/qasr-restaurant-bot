@@ -10,7 +10,7 @@ const OrderModal = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 	const { basket, setBasket } = useContext(ProductContext)
 	const [phone, setPhone] = useState<string>('')
-	const { user } = useContext(TgUserContext)
+	const { user, isUserBlocked } = useContext(TgUserContext)
 	const { setIsOpen } = useContext(DrawerContext)
 
 	const userPhoneNumber = localStorage.getItem('phone') || user?.phone_number
@@ -156,6 +156,7 @@ const OrderModal = () => {
 							className={styles.order_submit_btn}
 							name='submitBtn'
 							type='submit'
+							disabled={isUserBlocked}
 						>
 							Buyurtma berish
 						</button>
