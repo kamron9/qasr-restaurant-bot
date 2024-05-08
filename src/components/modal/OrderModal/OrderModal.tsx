@@ -61,7 +61,7 @@ const OrderModal = () => {
 	return (
 		<>
 			<button className={styles.order_btn} onClick={() => setIsModalOpen(true)}>
-				Rasmiylashtirish
+				Buyurtma berish
 			</button>
 			{/*  */}
 			<div
@@ -163,7 +163,7 @@ const OrderModal = () => {
 							type='submit'
 							disabled={isUserBlocked}
 						>
-							Buyurtma berish
+							Buyurtmani tasdiqlash
 						</button>
 					</form>
 				</div>
