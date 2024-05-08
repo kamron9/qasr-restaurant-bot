@@ -34,7 +34,6 @@ const TgUserProvider = ({ children }: { children: React.ReactNode }) => {
 			setUser(data)
 			setIsUserBlocked(data.is_blocked)
 		} catch (error: any) {
-			// error.response.data.errors[0].detail
 			console.log(error)
 		}
 	}

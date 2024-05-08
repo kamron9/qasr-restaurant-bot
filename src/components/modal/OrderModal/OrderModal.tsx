@@ -4,6 +4,7 @@ import CloseIcon from '../../../assets/CloseIcon'
 import { DrawerContext } from '../../../context/DrawerContext'
 import { BasketType, ProductContext } from '../../../context/ProductProvider'
 import { TgUserContext } from '../../../context/TgUserContext'
+import { baseUrl } from '../../../utils/consts'
 import styles from './order.module.css'
 
 const OrderModal = () => {
@@ -18,7 +19,7 @@ const OrderModal = () => {
 
 	const postData = async (data: any) => {
 		try {
-			await axios.post('https://qasr.chogirmali.uz/api/v1/shop/orders', data, {
+			await axios.post(`${baseUrl}/shop/orders`, data, {
 				headers: {
 					Authorization: userPhoneNumber,
 				},
@@ -32,6 +33,10 @@ const OrderModal = () => {
 			alert("Zakazingiz qabul qilindi yaqin orada siz bilan bog'lanishadi")
 		} catch (err) {
 			console.log(err)
+			alert("Xatolik yuz berdi, iltimos qayta urinib ko'ring")
+			setIsModalOpen(false)
+			setIsOpen(false)
+			setBasket([])
 		}
 	}
 
@@ -49,7 +54,7 @@ const OrderModal = () => {
 			orders: data,
 			delivery_type: 'delivery',
 			address: e.target.address.value,
-			secondary_phone_number: `+998${phone}`,
+			secondary_phone_number: phone?.length > 3 ? null : `+998${phone}`,
 			full_name: e.target.username.value,
 		})
 	}
