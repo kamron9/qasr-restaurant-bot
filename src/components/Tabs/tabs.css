@@ -21,6 +21,8 @@
 	border-radius: 22px;
 	transition: all 0.3s;
 	font-weight: bold;
+	/* width: fit-content; */
+	flex-shrink: 0;
 }
 
 .tab-button.active {
