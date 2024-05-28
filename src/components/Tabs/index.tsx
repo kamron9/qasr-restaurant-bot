@@ -32,7 +32,9 @@ const Tabs = () => {
 			const response = await axios.get<ITab[]>(`${baseUrl}/shop/categories`)
 			const data = await response?.data
 			setTabs(data)
-			setIsLoading(false)
+			setTimeout(() => {
+				setIsLoading(false)
+			}, 1500)
 			setActiveTab(data[0].id)
 		} catch (error) {
 			console.error(error)
@@ -43,7 +45,6 @@ const Tabs = () => {
 	const activeTabProducts = products?.filter(
 		(product: IProduct) => product.category_id === activeTab
 	)
-	console.log(activeTabProducts)
 
 	useEffect(() => {
 		getTabs()
@@ -62,12 +63,12 @@ const Tabs = () => {
 				))}
 			</div>
 
-			{isLoading === true && <Loader />}
+			{products.length === 0 && <Loader />}
 			<div className='tab-content'>
 				{activeTabProducts?.length > 0 &&
-					activeTabProducts.map((product: IProduct) => (
-						<Product key={product.id} product={product} />
-					))}
+					activeTabProducts.map((product: IProduct) => {
+						return <Product key={product.id} product={product} />
+					})}
 			</div>
 			{activeTabProducts?.length === 0 && isLoading === false && (
 				<div className={'no-product'}>
