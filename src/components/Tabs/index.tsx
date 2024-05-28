@@ -25,21 +25,26 @@ const Tabs = () => {
 	const [activeTab, setActiveTab] = useState<number>(0)
 	const [tabs, setTabs] = useState<ITab[]>([])
 	const { products } = useContext(ProductContext)
+	const [isLoading, setIsLoading] = useState<boolean>(true)
 	//get category
 	const getTabs = async () => {
 		try {
 			const response = await axios.get<ITab[]>(`${baseUrl}/shop/categories`)
 			const data = await response?.data
 			setTabs(data)
+			setIsLoading(false)
 			setActiveTab(data[0].id)
 		} catch (error) {
 			console.error(error)
 		}
 	}
 
-	//get Products
+	//get active tab products
+	const activeTabProducts = products?.filter(
+		(product: IProduct) => product.category_id === activeTab
+	)
+	console.log(activeTabProducts)
 
-	//filter by category
 	useEffect(() => {
 		getTabs()
 	}, [])
@@ -56,14 +61,19 @@ const Tabs = () => {
 					</button>
 				))}
 			</div>
-			{products?.length === 0 && <Loader />}
+
+			{isLoading === true && <Loader />}
 			<div className='tab-content'>
-				{products
-					?.filter((product: IProduct) => product.category_id === activeTab)
-					.map((product: IProduct) => (
+				{activeTabProducts?.length > 0 &&
+					activeTabProducts.map((product: IProduct) => (
 						<Product key={product.id} product={product} />
 					))}
 			</div>
+			{activeTabProducts?.length === 0 && isLoading === false && (
+				<div className={'no-product'}>
+					<p>Bu menyuda xozircha maxsulot yo'q</p>
+				</div>
+			)}
 		</div>
 	)
 }
